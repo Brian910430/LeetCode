@@ -16,12 +16,29 @@ class Solution
 public:
     int pathSum(TreeNode *root, int targetSum)
     {
-        ;
+        ans = 0;
+        DFS(root, targetSum);
+        return ans;
+    }
+
+private:
+    int ans;
+    void DFS(TreeNode *root, int targetSum)
+    {
+        if (root == nullptr)
+            return;
+        DFS2(root, targetSum);
+        DFS(root->left, targetSum);
+        DFS(root->right, targetSum);
+    }
+
+    void DFS2(TreeNode *root, long long targetSum)
+    {
+        if (root == nullptr)
+            return;
+        if (root->val == targetSum)
+            ans++;
+        DFS2(root->left, targetSum - root->val);
+        DFS2(root->right, targetSum - root->val);
     }
 };
-
-int main()
-{
-    Solution solution;
-    return 0;
-}
