@@ -7,17 +7,17 @@ public:
     vector<vector<int>> combine(int n, int k)
     {
         backTrack(n, k, 1);
-        return result;
+        return ans;
     }
 
 private:
-    vector<vector<int>> result;
+    vector<vector<int>> ans;
     vector<int> temp;
     void backTrack(int n, int k, int start)
     {
         if (k == 0)
         {
-            result.push_back(temp);
+            ans.push_back(temp);
             return;
         }
         for (int i = start; i <= n; i++)
