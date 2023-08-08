@@ -50,17 +50,44 @@ public:
         }
         else if (now->right != nullptr)
         {
-            ;
+            TreeNode *node = now->right;
+            TreeNode *nextNode = now->right;
+            while (nextNode->left != nullptr)
+            {
+                node = nextNode;
+                nextNode = nextNode->left;
+            }
+            if (node == nextNode)
+            {
+                now->val = node->val;
+                now->right = node->right;
+            }
+            else
+            {
+                now->val = nextNode->val;
+                node->left = nextNode->right;
+            }
         }
         else
         {
-            ;
+            TreeNode *node = now->left;
+            TreeNode *nextNode = now->left;
+            while (nextNode->right != nullptr)
+            {
+                node = nextNode;
+                nextNode = nextNode->right;
+            }
+            if (node == nextNode)
+            {
+                now->val = node->val;
+                now->left = node->left;
+            }
+            else
+            {
+                now->val = nextNode->val;
+                node->right = nextNode->left;
+            }
         }
+        return root;
     }
 };
-
-int main()
-{
-    Solution solution;
-    return 0;
-}
