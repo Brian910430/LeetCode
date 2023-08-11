@@ -20,7 +20,7 @@ public:
                 else if (nums[mid] < target)
                     left = mid;
                 else
-                    return mid;
+                    return true;
             }
         }
         else if (nums[0] > target)
@@ -33,7 +33,7 @@ public:
                 else if (nums[mid] > target)
                     right = mid - 1;
                 else
-                    return mid;
+                    return true;
             }
         }
         return -1;
