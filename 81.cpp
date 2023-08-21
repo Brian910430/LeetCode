@@ -4,38 +4,38 @@ using namespace std;
 class Solution
 {
 public:
-    int search(vector<int> &nums, int target)
+    bool search(std::vector<int> &nums, int target)
     {
+        if (nums.empty())
+            return 0;
         int left = 0;
         int right = nums.size() - 1;
-        if (nums[0] == target)
-            return 0;
-        else if (nums[0] < target)
+
+        while (left <= right)
         {
-            while (left < right)
+            int mid = (left + right) / 2;
+            if (nums[mid] == target)
+                return true;
+            else if (nums[left] == nums[mid] && nums[mid] == nums[right])
             {
-                int mid = (left + right + 1) / 2;
-                if (nums[mid] > target || nums[mid] < target && nums[mid] < nums[0])
-                    right = mid - 1;
-                else if (nums[mid] < target)
-                    left = mid;
-                else
-                    return true;
+                left++;
+                right--;
             }
-        }
-        else if (nums[0] > target)
-        {
-            while (left < right)
+            else if (nums[left] <= nums[mid])
             {
-                int mid = (left + right + 1) / 2;
-                if (nums[mid] < target || nums[mid] > target && nums[mid] > nums[0])
-                    left = mid;
-                else if (nums[mid] > target)
+                if (nums[left] <= target && target < nums[mid])
                     right = mid - 1;
                 else
-                    return true;
+                    left = mid + 1;
+            }
+            else
+            {
+                if (target <= nums[right] && nums[mid] < target)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
             }
         }
-        return -1;
+        return false;
     }
 };
