@@ -7,29 +7,17 @@ public:
     int numSubarraysWithSum(vector<int> &nums, int goal)
     {
         int n = nums.size();
+        int sum = 0;
         int ans = 0;
-        vector<int> prefix(n + 5, 0);
+        vector<int> record(n + 5, 0);
+        record[0] = 1;
 
-        for (int i = 0; i < n; i++)
-            prefix[i + 1] = prefix[i] + nums[i];
-        for (int i = 0; i <= n; i++)
+        for (auto num : nums)
         {
-            for (int j = i + 1; j <= n; j++)
-                if (prefix[j] - prefix[i] == goal)
-                    ans++;
-                else if (prefix[j] - prefix[i] > goal)
-                    break;
+            sum += num;
+            ans += sum >= goal ? record[sum - goal] : 0;
+            record[sum]++;
         }
         return ans;
     }
 };
-
-int main()
-{
-    Solution solution;
-    vector<int> nums = {1, 0, 1, 0, 1};
-    cout << solution.numSubarraysWithSum(nums, 2) << endl;
-    nums = {0, 0, 0, 0, 0};
-    cout << solution.numSubarraysWithSum(nums, 0) << endl;
-    return 0;
-}
