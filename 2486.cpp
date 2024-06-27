@@ -15,11 +15,3 @@ public:
         return t.length() - j;
     }
 };
-
-int main()
-{
-    Solution solution;
-    cout << solution.appendCharacters("coaching", "coding") << endl;
-    cout << 11111 << endl;
-    return 0;
-}
