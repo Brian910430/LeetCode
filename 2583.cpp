@@ -14,33 +14,29 @@ struct TreeNode
 class Solution
 {
 public:
-    int findMaxDepth(TreeNode *root)
-    {
-        if (root == nullptr)
-            return 0;
-        return 1 + max(findMaxDepth(root->left), findMaxDepth(root->right));
-    }
-
     long long kthLargestLevelSum(TreeNode *root, int k)
     {
-        TreeNode *now;
-        long long val;
-        queue<pair<TreeNode *, long long>> q;
-        vector<long long> comp(findMaxDepth(root), 0);
-        q.push(make_pair(root, 0));
+        vector<long long> record;
+        queue<TreeNode *> q;
+        q.push(root);
 
-        while (!q.empty())
+        while (q.size())
         {
-            now = q.front().first;
-            val = q.front().second;
-            q.pop();
-            comp[val] += now->val;
-            if (now->left)
-                q.push(make_pair(now->left, val + 1));
-            if (now->right)
-                q.push(make_pair(now->right, val + 1));
+            int n = q.size();
+            long long sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                auto now = q.front();
+                q.pop();
+                if (now->left)
+                    q.push(now->left);
+                if (now->right)
+                    q.push(now->right);
+                sum += now->val;
+            }
+            record.push_back(sum);
         }
-        sort(comp.begin(), comp.end());
-        return comp.size() >= k ? comp[comp.size() - k] : -1;
+        sort(record.begin(), record.end(), greater<long long>());
+        return record.size() >= k ? record[k - 1] : -1;
     }
 };
