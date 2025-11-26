@@ -6,5 +6,5 @@ using namespace std;
 int main()
 {
     Solution solution;
-    return 0
+    return 0;
 }
