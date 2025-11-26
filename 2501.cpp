@@ -21,11 +21,3 @@ public:
         return ans == 1 ? -1 : ans;
     }
 };
-
-int main()
-{
-    Solution solution;
-    vector<int> nums = {4, 3, 6, 16, 8, 2};
-    cout << solution.longestSquareStreak(nums) << endl;
-    return 0;
-}
